@@ -159,7 +159,7 @@ export default class CodeFlask {
   }
 
   listenTextarea () {
-    this.elTextarea.addEventListener('input', (e) => {
+    this.__handleInput = (e) => {
       this.code = e.target.value
       this.elCode.innerHTML = escapeHtml(e.target.value)
       this.highlight()
@@ -167,23 +167,31 @@ export default class CodeFlask {
         this.runUpdate()
         this.setLineNumber()
       }, 1)
-    })
-
-    this.elTextarea.addEventListener('keydown', (e) => {
+    }
+    this.__handleKeydown = (e) => {
       if (this.opts.readonly) {
         return;
       }
       this.handleTabs(e)
       this.handleSelfClosingCharacters(e)
       this.handleNewLineIndentation(e)
-    })
-
-    this.elTextarea.addEventListener('scroll', (e) => {
+    }
+    this.__handleScroll = (e) => {
       this.elPre.style.transform = `translate3d(-${e.target.scrollLeft}px, -${e.target.scrollTop}px, 0)`
       if (this.elLineNumbers) {
         this.elLineNumbers.style.transform = `translate3d(0, -${e.target.scrollTop}px, 0)`
       }
-    })
+    }
+
+    this.elTextarea.addEventListener('input', this.__handleInput)
+    this.elTextarea.addEventListener('keydown', this.__handleKeydown)
+    this.elTextarea.addEventListener('scroll', this.__handleScroll)
+  }
+
+  destroy () {
+    this.elTextarea.removeEventListener('input', this.__handleInput)
+    this.elTextarea.removeEventListener('keydown', this.__handleKeydown)
+    this.elTextarea.removeEventListener('scroll', this.__handleScroll)
   }
 
   handleTabs (e) {

@@ -31,7 +31,6 @@
     "@wdio/spec-reporter": "^6.1.14",
     "@wdio/sync": "^6.1.14",
     "chai": "^4.1.2",
-    "chromedriver": "^83.0.0",
     "micro": "^9.3.0",
     "mocha": "^5.1.1",
     "rollup": "^0.58.1",
@@ -39,8 +38,7 @@
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-node-resolve": "^3.0.3",
     "rollup-plugin-uglify": "^3.0.0",
-    "serve": "^7.0.0",
-    "wdio-chromedriver-service": "^6.0.3"
+    "serve": "^7.0.0"
   },
   "repository": {
     "type": "git",
